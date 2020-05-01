@@ -33,6 +33,11 @@ router.post('/signup',  cors.corsWithOptions, (req, res, next) => {
     else {
       if(req.body.firstname) user.firstname = req.body.firstname;
       if(req.body.lastname) user.lastname = req.body.lastname;
+      if(req.body.bio) user.bio = req.body.bio;
+      if(req.body.dateofbirth) user.dateofbirth = req.body.dateofbirth;
+      if(req.body.teacher) user.teacher = req.body.teacher;
+      if(req.body.aaa) user.aaa = req.body.aaa;
+
       user.save((err,user) => {
         if(err) {
           res.statusCode = 500;

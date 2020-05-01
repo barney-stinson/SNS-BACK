@@ -16,6 +16,22 @@ var User = new Schema({
     admin:   {
         type: Boolean,
         default: false
+    },
+    teacher:  {
+        type: Boolean,
+        default: false
+    },
+    aaa:  {
+        type: Boolean,
+        default: false
+    },
+    dateofbirth: {
+        type: Date,
+        default: ''
+    },
+    bio: {
+        type: String,
+        default: ''
     }
 });
 
