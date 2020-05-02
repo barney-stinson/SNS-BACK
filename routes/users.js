@@ -5,6 +5,10 @@ var User = require('../models/user');
 var passport = require('passport');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
+const uploadRouter = require('./uploadRouter');
+
+
+router.use('/updateProfile', uploadRouter);
 
 
 router.use(bodyParser.json());
@@ -120,6 +124,28 @@ router.get('/checkJWTtoken', cors.corsWithOptions, (req, res) => {
     }
   }) (req, res);
 });
+var x = "efee"
+router.route('/updateProfile')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+  User.findByIdAndUpdate(req.user._id, {
+    $set: {"image": x}
+}, {new: true})
+.then((user) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(user);
+}, (err) => next(err))
+.catch((err) => next(err));
+});
+
+
+
+
+// router.put('/updateProfile/:profileId', cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+//   res.statusCode = 403;
+//   res.end('PUT operation not supported on /dishes');
+// });
 
 
 module.exports = router;

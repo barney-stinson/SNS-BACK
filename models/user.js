@@ -32,7 +32,13 @@ var User = new Schema({
     bio: {
         type: String,
         default: ''
+    },
+    image: {
+        type: String,
+        default: ''
     }
+},{
+    timestamps: true
 });
 
 User.plugin(passportLocalMongoose);
