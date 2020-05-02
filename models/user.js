@@ -36,6 +36,10 @@ var User = new Schema({
     image: {
         type: String,
         default: ''
+    },
+    email: {
+        type: String,
+        default: ''
     }
 },{
     timestamps: true

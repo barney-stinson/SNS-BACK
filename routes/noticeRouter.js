@@ -4,31 +4,31 @@ const mongoose = require('mongoose');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
 
-const Dishes = require('../models/dishes');
+const Notices = require('../models/notices');
 
-const dishRouter = express.Router();
+const noticeRouter = express.Router();
 
-dishRouter.use(bodyParser.json());
+noticeRouter.use(bodyParser.json());
 
-dishRouter.route('/')
+noticeRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.cors, (req,res,next) => {
-   Dishes.find(req.query)
+.get(cors.corsWithOptions, authenticate.verifyUser,(req,res,next) => {
+   Notices.find(req.query)
    .populate('comments.author')
-   .then((dishes) => {
+   .then((notices) => {
        res.statusCode = 200;
        res.setHeader('Content-Type', 'application/json');
-       res.json(dishes);
+       res.json(notices);
    }, (err) => next(err))
    .catch((err) => next(err));
 })
 .post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    Dishes.create(req.body)
-    .then((dish) => {
-        console.log('Dish Created', dish);
+    Notices.create(req.body)
+    .then((notice) => {
+        console.log('Dish Created', notice);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(notice);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
@@ -37,7 +37,7 @@ dishRouter.route('/')
     res.end('PUT operation not supported on /dishes');
 })
 .delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    Dishes.remove({})
+    Notices.remove({})
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -47,35 +47,35 @@ dishRouter.route('/')
 });
 
 
-dishRouter.route('/:dishId')
+noticeRouter.route('/:noticeId')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.cors, (req,res,next) => {
-    Dishes.findById(req.params.dishId)
+.get(cors.corsWithOptions, authenticate.verifyUser,(req,res,next) => {
+    Notices.findById(req.params.noticeId)
     .populate('comments.author')
-    .then((dish) => {
+    .then((notice) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(notice);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req,res,next) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, (req,res,next) => {
     req.statusCode=403;
     res.end('POST operation not supported on /dishes/');
 })
-.put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req,res,next) => {
-    Dishes.findByIdAndUpdate(req.params.dishId, {
+.put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, (req,res,next) => {
+    Notices.findByIdAndUpdate(req.params.noticeId, {
         $set: req.body
     }, {new: true})
-    .then((dish) => {
+    .then((notice) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(notice);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req,res,next) => {
-    Dishes.findByIdAndDelete(req.params.dishId)
+.delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, (req,res,next) => {
+    Notices.findByIdAndDelete(req.params.noticeId)
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -85,4 +85,4 @@ dishRouter.route('/:dishId')
 });
 
 
-module.exports = dishRouter;
+module.exports = noticeRouter;

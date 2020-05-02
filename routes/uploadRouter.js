@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
     },
 
     filename: (req, file, cb) => {
-        cb(null, `${req.user.username}_${file.originalname}`)
+        cb(null, `${req.user.username}_${Date.now()}_${file.originalname}`)
     }
 });
 
@@ -43,11 +43,7 @@ uploadRouter.route('/')
         if (err) {
           res.send(err);
         }
-        // } else {
-        //   res.send(result);
-        // }
       });
-    // let x = "public/images/"+req.file.filename;
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(req.file);

@@ -12,7 +12,7 @@ const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var dishRouter = require('./routes/dishRouter');
+var noticeRouter = require('./routes/noticeRouter');
 
 const mongoose =require('mongoose');
 
@@ -55,7 +55,7 @@ app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/dishes', dishRouter);
+app.use('/noticeBoard', noticeRouter);
 
 
 
