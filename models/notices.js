@@ -16,6 +16,10 @@ const noticeSchema = new Schema({
     author:  {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    file: {
+        type: String,
+        default: ''
     }
 }, {
     timestamps: true
