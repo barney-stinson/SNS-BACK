@@ -13,6 +13,7 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var noticeRouter = require('./routes/noticeRouter');
+var commentRouter = require('./routes/commentRouter');
 
 const mongoose =require('mongoose');
 
@@ -56,8 +57,7 @@ app.use('/users', usersRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/noticeBoard', noticeRouter);
-
-
+app.use('/comments',commentRouter);
 
 
 // catch 404 and forward to error handler
