@@ -13,15 +13,28 @@ router.use('/uploadProfile', uploadRouter);
 
 router.use(bodyParser.json());
 
-/* GET users listing. */
-router.options('*', cors.corsWithOptions, (req, res) => { res.sendStatus(200); } )
-router.get('/', cors.cors, authenticate.verifyUser, authenticate.verifyAdmin, (req,res,next) => {
+router.route('/')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); } )
+.get(cors.corsWithOptions, authenticate.verifyUser, (req,res,next) => {
   User.find({})
   .populate('groups')
   .then((users) => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(users);
+  }, (err) => next(err))
+  .catch((err) => next(err));
+});
+
+router.route('/searchUser')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); } )
+.post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+  User.findOne({username: req.body.username})
+  .populate('groups')
+  .then((user) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(user);
   }, (err) => next(err))
   .catch((err) => next(err));
 });
