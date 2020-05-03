@@ -19,7 +19,7 @@ noticeRouter.use('/noticeFiles', noticeFilesRouter);
 
 noticeRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.corsWithOptions, authenticate.verifyUser || authenticate.verifyAAA || authenticate.verifyTeacher,(req,res,next) => {
+.get(cors.corsWithOptions, authenticate.verifyUser, (req,res,next) => {
    Notices.find(req.query)
    .populate('author')
    .populate('comments.author')

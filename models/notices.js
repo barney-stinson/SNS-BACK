@@ -7,7 +7,7 @@ const Currency = mongoose.Types.Currency;
 const noticeSchema = new Schema({
     message: {
         type: String,
-        required: true,
+        default: true
     },
     title:{
         type: String,
