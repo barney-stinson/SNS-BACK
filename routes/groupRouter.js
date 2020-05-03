@@ -10,7 +10,6 @@ const Groups = require('../models/groups');
 groupRouter.use(bodyParser.json());
 
 
-
 groupRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => {res.sendStatus(200); })
 .get(cors.corsWithOptions, authenticate.verifyUser, (req,res,next) => {
@@ -133,6 +132,34 @@ groupRouter.route('/:groupId')
             err.status = 404;
             return next(err);            
         }
+    }, (err) => next(err))
+    .catch((err) => next(err));
+});
+
+groupRouter.route('/addToGroup/:groupId')
+.options(cors.corsWithOptions, (req, res) => {res.sendStatus(200); })
+.post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    Groups.findById(req.params.groupId)
+    .then((group) =>{
+        if(group.password != req.body.password) {
+            var err = new Error("Invalid Password!");
+            err.status = 406;
+            return next(err);
+        }
+        Groups.findByIdAndUpdate(req.params.groupId, {
+            $push: {users: req.user._id}
+        },{new: true})
+        .then((group) => {
+            Groups.findById(req.params.groupId)
+            .populate('admin')
+            .populate('users')
+            .then((group) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(group);  
+            },(err)=>next(err))
+        .catch((err)=>next(err))
+        })
     }, (err) => next(err))
     .catch((err) => next(err));
 });
