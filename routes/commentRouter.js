@@ -12,7 +12,7 @@ commentRouter.use(bodyParser.json());
 
 commentRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.cors, authenticate.verifyUser, (req,res,next) => {
+.get(cors.corsWithOptions, authenticate.verifyUser, (req,res,next) => {
     Comments.find(req.query)
     .populate('author')
     .then((comments) => {

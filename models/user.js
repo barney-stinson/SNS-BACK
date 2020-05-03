@@ -40,7 +40,11 @@ var User = new Schema({
     email: {
         type: String,
         default: ''
-    }
+    },
+    groups: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Group'
+    }]
 },{
     timestamps: true
 });

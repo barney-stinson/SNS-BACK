@@ -17,6 +17,7 @@ router.use(bodyParser.json());
 router.options('*', cors.corsWithOptions, (req, res) => { res.sendStatus(200); } )
 router.get('/', cors.cors, authenticate.verifyUser, authenticate.verifyAdmin, (req,res,next) => {
   User.find({})
+  .populate('groups')
   .then((users) => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');

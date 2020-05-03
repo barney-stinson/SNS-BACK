@@ -6,6 +6,7 @@ const cors = require('./cors');
 const groupRouter = express.Router();
 
 const Groups = require('../models/groups');
+var users = require('../models/user'); 
 
 groupRouter.use(bodyParser.json());
 
@@ -146,6 +147,14 @@ groupRouter.route('/addToGroup/:groupId')
             err.status = 406;
             return next(err);
         }
+
+        users.findByIdAndUpdate(req.user._id, {
+            $push: {groups: req.params.groupId}
+        },{new:true}, function(err, result) {
+            if (err) {
+              res.send(err);
+            }
+        });
         Groups.findByIdAndUpdate(req.params.groupId, {
             $push: {users: req.user._id}
         },{new: true})

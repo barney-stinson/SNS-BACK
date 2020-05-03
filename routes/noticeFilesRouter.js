@@ -55,9 +55,9 @@ noticeFilesRouter.route('/:noticeId')
 .post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, upload.array('myFiles', 12), (req, res, next) => {
     const files = req.files
     if (!files) {
-      const error = new Error('Please choose files')
-      error.httpStatusCode = 400
-      return next(error)
+      const err = new Error('Please choose files')
+      err.httpStatusCode = 400
+      return next(err)
     }
     for(let i=0;i<Object.keys(files).length;i++){
         let x = `public/noticeFiles/${files[i].filename}`;
