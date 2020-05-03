@@ -8,7 +8,6 @@ const noticeRouter = express.Router();
 
 
 const Notices = require('../models/notices');
-const Comments = require('../models/comments');
 const NoticeFiles = require('../models/noticeFiles');
 
 noticeRouter.use(bodyParser.json());
@@ -22,7 +21,6 @@ noticeRouter.route('/')
 .get(cors.corsWithOptions, authenticate.verifyUser, (req,res,next) => {
    Notices.find(req.query)
    .populate('author')
-   .populate('comments.author')
    .then((notices) => {
        res.statusCode = 200;
        res.setHeader('Content-Type', 'application/json');
@@ -71,7 +69,6 @@ noticeRouter.route('/:noticeId')
 .get(cors.corsWithOptions, authenticate.verifyUser,(req,res,next) => {
     Notices.findById(req.params.noticeId)
     .populate('author')
-    .populate('comments.author')
     .then((notice) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
