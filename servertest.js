@@ -1,5 +1,20 @@
 
 
+
+
+
+
+(0) /noticeBoard/noticeFiles   is updated
+now user can oply upload  single image
+
+and its path will be saved in Notice model as "file"
+
+(a) post
+req - authentication header
+body - field name - imageFile
+and also attach image with it
+
+
 add to all the request headers -
 fieldname: Origin - https://localhost:3443 
 
@@ -585,8 +600,812 @@ res -
 }
 
 
+(14) /groups 
+(a) get (verified users)
+
+req - if send with query  ?_id=<group_id> then sends back that information only
+if no query is set then returns all the groups
+
+res- (with query)
+[
+    {
+        "users": [
+            {
+                "lastname": "1999",
+                "admin": true,
+                "teacher": true,
+                "aaa": false,
+                "dateofbirth": "1999-10-10T18:30:00.000Z",
+                "bio": "hello guys",
+                "image": "public/images/nauki_1588381075148_logo.png",
+                "email": "",
+                "groups": [],
+                "_id": "5eac94db0120923b882c2277",
+                "firstname": "nauki",
+                "username": "nauki",
+                "createdAt": "2020-05-01T21:30:03.961Z",
+                "updatedAt": "2020-05-02T00:57:55.156Z",
+                "__v": 0
+            },
+            {
+                "lastname": "lalla",
+                "admin": false,
+                "teacher": false,
+                "aaa": false,
+                "dateofbirth": null,
+                "bio": "",
+                "image": "",
+                "email": "",
+                "groups": [
+                    "5eaec34d945a4d4c54c2012c"
+                ],
+                "_id": "5eadb482b574eb4b28cdbb34",
+                "firstname": "haye",
+                "username": "ishan",
+                "createdAt": "2020-05-02T17:57:22.517Z",
+                "updatedAt": "2020-05-03T19:46:30.462Z",
+                "__v": 0
+            }
+        ],
+        "description": "balle balle-2",
+        "_id": "5eaec34d945a4d4c54c2012c",
+        "name": "test group -3 ",
+        "password": "1999",
+        "admin": {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-02T00:57:55.156Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T13:12:45.808Z",
+        "updatedAt": "2020-05-03T19:46:30.462Z",
+        "__v": 0
+    }
+]
+
+with out query - 
+[
+    {
+        "users": [
+            {
+                "lastname": "1999",
+                "admin": true,
+                "teacher": true,
+                "aaa": false,
+                "dateofbirth": "1999-10-10T18:30:00.000Z",
+                "bio": "hello guys",
+                "image": "public/images/nauki_1588381075148_logo.png",
+                "email": "",
+                "groups": [],
+                "_id": "5eac94db0120923b882c2277",
+                "firstname": "nauki",
+                "username": "nauki",
+                "createdAt": "2020-05-01T21:30:03.961Z",
+                "updatedAt": "2020-05-02T00:57:55.156Z",
+                "__v": 0
+            },
+            {
+                "lastname": "lalla",
+                "admin": false,
+                "teacher": false,
+                "aaa": false,
+                "dateofbirth": null,
+                "bio": "",
+                "image": "",
+                "email": "",
+                "groups": [
+                    "5eaec34d945a4d4c54c2012c"
+                ],
+                "_id": "5eadb482b574eb4b28cdbb34",
+                "firstname": "haye",
+                "username": "ishan",
+                "createdAt": "2020-05-02T17:57:22.517Z",
+                "updatedAt": "2020-05-03T19:46:30.462Z",
+                "__v": 0
+            },
+            {
+                "lastname": "lalla",
+                "admin": false,
+                "teacher": false,
+                "aaa": false,
+                "dateofbirth": null,
+                "bio": "",
+                "image": "",
+                "email": "",
+                "groups": [
+                    "5eaec34d945a4d4c54c2012c"
+                ],
+                "_id": "5eadb482b574eb4b28cdbb34",
+                "firstname": "haye",
+                "username": "ishan",
+                "createdAt": "2020-05-02T17:57:22.517Z",
+                "updatedAt": "2020-05-03T19:46:30.462Z",
+                "__v": 0
+            },
+            {
+                "lastname": "1999",
+                "admin": true,
+                "teacher": true,
+                "aaa": false,
+                "dateofbirth": "1999-10-10T18:30:00.000Z",
+                "bio": "hello guys",
+                "image": "public/images/nauki_1588381075148_logo.png",
+                "email": "",
+                "groups": [],
+                "_id": "5eac94db0120923b882c2277",
+                "firstname": "nauki",
+                "username": "nauki",
+                "createdAt": "2020-05-01T21:30:03.961Z",
+                "updatedAt": "2020-05-02T00:57:55.156Z",
+                "__v": 0
+            }
+        ],
+        "description": "balle balle-2",
+        "_id": "5eaec346945a4d4c54c2012b",
+        "name": "test group -2 ",
+        "password": "1999",
+        "admin": {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-02T00:57:55.156Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T13:12:38.544Z",
+        "updatedAt": "2020-05-03T19:42:51.018Z",
+        "__v": 0
+    },
+    {
+        "users": [
+            {
+                "lastname": "1999",
+                "admin": true,
+                "teacher": true,
+                "aaa": false,
+                "dateofbirth": "1999-10-10T18:30:00.000Z",
+                "bio": "hello guys",
+                "image": "public/images/nauki_1588381075148_logo.png",
+                "email": "",
+                "groups": [],
+                "_id": "5eac94db0120923b882c2277",
+                "firstname": "nauki",
+                "username": "nauki",
+                "createdAt": "2020-05-01T21:30:03.961Z",
+                "updatedAt": "2020-05-02T00:57:55.156Z",
+                "__v": 0
+            },
+            {
+                "lastname": "lalla",
+                "admin": false,
+                "teacher": false,
+                "aaa": false,
+                "dateofbirth": null,
+                "bio": "",
+                "image": "",
+                "email": "",
+                "groups": [
+                    "5eaec34d945a4d4c54c2012c"
+                ],
+                "_id": "5eadb482b574eb4b28cdbb34",
+                "firstname": "haye",
+                "username": "ishan",
+                "createdAt": "2020-05-02T17:57:22.517Z",
+                "updatedAt": "2020-05-03T19:46:30.462Z",
+                "__v": 0
+            }
+        ],
+        "description": "balle balle-2",
+        "_id": "5eaec34d945a4d4c54c2012c",
+        "name": "test group -3 ",
+        "password": "1999",
+        "admin": {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-02T00:57:55.156Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T13:12:45.808Z",
+        "updatedAt": "2020-05-03T19:46:30.462Z",
+        "__v": 0
+    }
+]
+
+(b) post (only verified users) 
+
+req- header- with authentication token
+body- {"name": "groupname", "password": "grouppassword", "description":"groupdescription"}
+
+res-
+{
+    "users": [
+        {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-02T00:57:55.156Z",
+            "__v": 0
+        }
+    ],
+    "description": "groupdescription",
+    "_id": "5eaf3dc6fb24612480fac742",
+    "name": "groupname",
+    "password": "grouppassword",
+    "admin": {
+        "lastname": "1999",
+        "admin": true,
+        "teacher": true,
+        "aaa": false,
+        "dateofbirth": "1999-10-10T18:30:00.000Z",
+        "bio": "hello guys",
+        "image": "public/images/nauki_1588381075148_logo.png",
+        "email": "",
+        "groups": [],
+        "_id": "5eac94db0120923b882c2277",
+        "firstname": "nauki",
+        "username": "nauki",
+        "createdAt": "2020-05-01T21:30:03.961Z",
+        "updatedAt": "2020-05-02T00:57:55.156Z",
+        "__v": 0
+    },
+    "createdAt": "2020-05-03T21:55:18.548Z",
+    "updatedAt": "2020-05-03T21:55:18.548Z",
+    "__v": 0
+}
+
+
+(c) delete
+only by admin must not be used as it delets all the notices at once
+
+req- authentication header
+
+res - 
+{
+    "n": 3,
+    "ok": 1,
+    "deletedCount": 3
+}
+
+
+(15) /groups/:groupId
+
+(a) get (only for verified users)
+
+req - authentication header
+res -  
+{
+    "users": [
+        {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-02T00:57:55.156Z",
+            "__v": 0
+        }
+    ],
+    "description": "groupdescription",
+    "_id": "5eaf3dc6fb24612480fac742",
+    "name": "groupname",
+    "password": "grouppassword",
+    "admin": {
+        "lastname": "1999",
+        "admin": true,
+        "teacher": true,
+        "aaa": false,
+        "dateofbirth": "1999-10-10T18:30:00.000Z",
+        "bio": "hello guys",
+        "image": "public/images/nauki_1588381075148_logo.png",
+        "email": "",
+        "groups": [],
+        "_id": "5eac94db0120923b882c2277",
+        "firstname": "nauki",
+        "username": "nauki",
+        "createdAt": "2020-05-01T21:30:03.961Z",
+        "updatedAt": "2020-05-02T00:57:55.156Z",
+        "__v": 0
+    },
+    "createdAt": "2020-05-03T21:55:18.548Z",
+    "updatedAt": "2020-05-03T21:55:18.548Z",
+    "__v": 0
+}
+
+(b) put (only by them who created it, verified users only)
+
+req - {"name": "groupname", "password": "grouppassword", "description":"groupdescription"}
+authentication header 
+res - 
+{
+    "users": [
+        {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-02T00:57:55.156Z",
+            "__v": 0
+        }
+    ],
+    "description": "groupdescription",
+    "_id": "5eaf3dc6fb24612480fac742",
+    "name": "groupname",
+    "password": "grouppassword",
+    "admin": {
+        "lastname": "1999",
+        "admin": true,
+        "teacher": true,
+        "aaa": false,
+        "dateofbirth": "1999-10-10T18:30:00.000Z",
+        "bio": "hello guys",
+        "image": "public/images/nauki_1588381075148_logo.png",
+        "email": "",
+        "groups": [],
+        "_id": "5eac94db0120923b882c2277",
+        "firstname": "nauki",
+        "username": "nauki",
+        "createdAt": "2020-05-01T21:30:03.961Z",
+        "updatedAt": "2020-05-02T00:57:55.156Z",
+        "__v": 0
+    },
+    "createdAt": "2020-05-03T21:55:18.548Z",
+    "updatedAt": "2020-05-03T22:01:31.479Z",
+    "__v": 0
+}
 
 
 
+(c) delete (only by them who created it, verified users only)
+
+req -authentication header
+
+res - 
+{
+    "users": [
+        "5eac94db0120923b882c2277"
+    ],
+    "description": "groupdescription",
+    "_id": "5eaf3dc6fb24612480fac742",
+    "name": "groupname",
+    "password": "grouppassword",
+    "admin": "5eac94db0120923b882c2277",
+    "createdAt": "2020-05-03T21:55:18.548Z",
+    "updatedAt": "2020-05-03T22:01:31.479Z",
+    "__v": 0
+}
+
+(16) /groups/addToGroup/:groupId
+
+(a) post  (for verified users only)
+
+use to get added to group
+
+req - authentication header 
+body - {"password": "grouppassword"}
+res - 
+{
+    "users": [
+        {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [
+                "5eaf4048fb24612480fac743"
+            ],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-03T22:06:51.795Z",
+            "__v": 0
+        },
+        {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [
+                "5eaf4048fb24612480fac743"
+            ],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-03T22:06:51.795Z",
+            "__v": 0
+        }
+    ],
+    "description": "groupdescription",
+    "_id": "5eaf4048fb24612480fac743",
+    "name": "groupname",
+    "password": "grouppassword",
+    "admin": {
+        "lastname": "1999",
+        "admin": true,
+        "teacher": true,
+        "aaa": false,
+        "dateofbirth": "1999-10-10T18:30:00.000Z",
+        "bio": "hello guys",
+        "image": "public/images/nauki_1588381075148_logo.png",
+        "email": "",
+        "groups": [
+            "5eaf4048fb24612480fac743"
+        ],
+        "_id": "5eac94db0120923b882c2277",
+        "firstname": "nauki",
+        "username": "nauki",
+        "createdAt": "2020-05-01T21:30:03.961Z",
+        "updatedAt": "2020-05-03T22:06:51.795Z",
+        "__v": 0
+    },
+    "createdAt": "2020-05-03T22:06:00.059Z",
+    "updatedAt": "2020-05-03T22:06:51.795Z",
+    "__v": 0
+}
+
+(17) /groupchats 
+
+(a) get (verified user)
+
+req - Authorizationheader
+query - if query sent with  ?group=<group_id> then will chats only of that group
+    else shows all the chats
+res - 
+[
+    {
+        "_id": "5eaf1ca4458f0a0e24cfb3ee",
+        "message": "fafeaf",
+        "group": "5eaec346945a4d4c54c2012b",
+        "user": {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [
+                "5eaf4048fb24612480fac743"
+            ],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-03T22:06:51.795Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T19:33:56.089Z",
+        "updatedAt": "2020-05-03T19:33:56.089Z",
+        "__v": 0
+    },
+    {
+        "_id": "5eaf1cc03ec32940784f9be5",
+        "message": "fafeaf",
+        "group": "5eaec346945a4d4c54c2012b",
+        "user": {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [
+                "5eaf4048fb24612480fac743"
+            ],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-03T22:06:51.795Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T19:34:24.904Z",
+        "updatedAt": "2020-05-03T19:34:24.904Z",
+        "__v": 0
+    },
+    {
+        "_id": "5eaf2366dbd9fc37602c9177",
+        "message": "1999",
+        "group": "5eaec346945a4d4c54c2012b",
+        "user": {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [
+                "5eaf4048fb24612480fac743"
+            ],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-03T22:06:51.795Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T20:02:46.884Z",
+        "updatedAt": "2020-05-03T20:02:46.884Z",
+        "__v": 0
+    },
+    {
+        "_id": "5eaf2390dbd9fc37602c9178",
+        "message": "balle balle",
+        "group": "5eaec346945a4d4c54c2012b",
+        "user": {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [
+                "5eaf4048fb24612480fac743"
+            ],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-03T22:06:51.795Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T20:03:28.339Z",
+        "updatedAt": "2020-05-03T20:03:28.339Z",
+        "__v": 0
+    },
+    {
+        "_id": "5eaf23c0dbd9fc37602c9179",
+        "message": "balle balle",
+        "group": "5eaec346945a4d4c54c2012b",
+        "user": {
+            "lastname": "lalla",
+            "admin": false,
+            "teacher": false,
+            "aaa": false,
+            "dateofbirth": null,
+            "bio": "",
+            "image": "",
+            "email": "",
+            "groups": [
+                "5eaec34d945a4d4c54c2012c"
+            ],
+            "_id": "5eadb482b574eb4b28cdbb34",
+            "firstname": "haye",
+            "username": "ishan",
+            "createdAt": "2020-05-02T17:57:22.517Z",
+            "updatedAt": "2020-05-03T19:46:30.462Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T20:04:16.860Z",
+        "updatedAt": "2020-05-03T20:04:16.860Z",
+        "__v": 0
+    },
+    {
+        "_id": "5eaf2409dbd9fc37602c917a",
+        "message": "balle balle",
+        "group": "5eaec346945a4d4c54c2012b",
+        "user": {
+            "lastname": "1999",
+            "admin": true,
+            "teacher": true,
+            "aaa": false,
+            "dateofbirth": "1999-10-10T18:30:00.000Z",
+            "bio": "hello guys",
+            "image": "public/images/nauki_1588381075148_logo.png",
+            "email": "",
+            "groups": [
+                "5eaf4048fb24612480fac743"
+            ],
+            "_id": "5eac94db0120923b882c2277",
+            "firstname": "nauki",
+            "username": "nauki",
+            "createdAt": "2020-05-01T21:30:03.961Z",
+            "updatedAt": "2020-05-03T22:06:51.795Z",
+            "__v": 0
+        },
+        "createdAt": "2020-05-03T20:05:29.872Z",
+        "updatedAt": "2020-05-03T20:05:29.872Z",
+        "__v": 0
+    }
+]
+
+(b) post (only for verified users) :
+
+req- body-{"message": "frggrgrgrs", "group": "y6g4ygfg6g673gyog27"}
+authorization header
+res- 
+{
+    "_id": "5eaf4788fb24612480fac744",
+    "message": "jkrngknrk",
+    "group": "5eaec346945a4d4c54c2012b",
+    "user": {
+        "lastname": "1999",
+        "admin": true,
+        "teacher": true,
+        "aaa": false,
+        "dateofbirth": "1999-10-10T18:30:00.000Z",
+        "bio": "hello guys",
+        "image": "public/images/nauki_1588381075148_logo.png",
+        "email": "",
+        "groups": [
+            "5eaf4048fb24612480fac743"
+        ],
+        "_id": "5eac94db0120923b882c2277",
+        "firstname": "nauki",
+        "username": "nauki",
+        "createdAt": "2020-05-01T21:30:03.961Z",
+        "updatedAt": "2020-05-03T22:06:51.795Z",
+        "__v": 0
+    },
+    "createdAt": "2020-05-03T22:36:56.602Z",
+    "updatedAt": "2020-05-03T22:36:56.602Z",
+    "__v": 0
+}
+
+(c) delete try not to useas delets all the group chats
+req -authorization header only by admin
+res -
+{
+    "n": 3,
+    "ok": 1,
+    "deletedCount": 3
+}
 
 
+(17) /groupChats/:groupChatId
+
+(a) get (only for verified users)
+
+req- authorization header
+res - {
+    "_id": "5eaf4788fb24612480fac744",
+    "message": "jkrngknrk",
+    "group": "5eaec346945a4d4c54c2012b",
+    "user": {
+        "lastname": "1999",
+        "admin": true,
+        "teacher": true,
+        "aaa": false,
+        "dateofbirth": "1999-10-10T18:30:00.000Z",
+        "bio": "hello guys",
+        "image": "public/images/nauki_1588381075148_logo.png",
+        "email": "",
+        "groups": [
+            "5eaf4048fb24612480fac743"
+        ],
+        "_id": "5eac94db0120923b882c2277",
+        "firstname": "nauki",
+        "username": "nauki",
+        "createdAt": "2020-05-01T21:30:03.961Z",
+        "updatedAt": "2020-05-03T22:06:51.795Z",
+        "__v": 0
+    },
+    "createdAt": "2020-05-03T22:36:56.602Z",
+    "updatedAt": "2020-05-03T22:36:56.602Z",
+    "__v": 0
+}
+
+(b) delete (can only be deleted by who messaged it)
+
+req - authorization header
+res - {
+    "_id": "5eaf4788fb24612480fac744",
+    "message": "jkrngknrk",
+    "group": "5eaec346945a4d4c54c2012b",
+    "user": "5eac94db0120923b882c2277",
+    "createdAt": "2020-05-03T22:36:56.602Z",
+    "updatedAt": "2020-05-03T22:36:56.602Z",
+    "__v": 0
+}
+
+(18)  /users/searchUser
+(a) post (only by verified user)
+
+req- authorization header
+body - {username: nauki}
+res - {
+    "lastname": "1999",
+    "admin": true,
+    "teacher": true,
+    "aaa": false,
+    "dateofbirth": "1999-10-10T18:30:00.000Z",
+    "bio": "hello guys",
+    "image": "public/images/nauki_1588381075148_logo.png",
+    "email": "",
+    "groups": [
+        {
+            "users": [
+                "5eac94db0120923b882c2277",
+                "5eac94db0120923b882c2277"
+            ],
+            "description": "groupdescription",
+            "_id": "5eaf4048fb24612480fac743",
+            "name": "groupname",
+            "password": "grouppassword",
+            "admin": "5eac94db0120923b882c2277",
+            "createdAt": "2020-05-03T22:06:00.059Z",
+            "updatedAt": "2020-05-03T22:06:51.795Z",
+            "__v": 0
+        }
+    ],
+    "_id": "5eac94db0120923b882c2277",
+    "firstname": "nauki",
+    "username": "nauki",
+    "createdAt": "2020-05-01T21:30:03.961Z",
+    "updatedAt": "2020-05-03T22:06:51.795Z",
+    "__v": 0
+}

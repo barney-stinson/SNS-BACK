@@ -8,7 +8,6 @@ const noticeRouter = express.Router();
 
 
 const Notices = require('../models/notices');
-const NoticeFiles = require('../models/noticeFiles');
 
 noticeRouter.use(bodyParser.json());
 const noticeFilesRouter = require('./noticeFilesRouter');
