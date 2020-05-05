@@ -26,7 +26,7 @@ var User = new Schema({
         default: false
     },
     dateofbirth: {
-        type: Date,
+        type: String,
         default: ''
     },
     bio: {
