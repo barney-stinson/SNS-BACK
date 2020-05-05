@@ -43,6 +43,9 @@ router.route('/searchUser')
 router.post('/signup',  cors.corsWithOptions, (req, res, next) => {
   User.register(new User({username: req.body.username}), 
     req.body.password, (err, user) => {
+      // console.log("request", req.body);
+      // console.log("error", err);
+      // console.log("user", user);
     if(err) {
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');
@@ -64,6 +67,7 @@ router.post('/signup',  cors.corsWithOptions, (req, res, next) => {
           return;        
         }
         passport.authenticate('local')(req, res, () => {
+          // console.log("say something");
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
           res.json({success: true, status: 'Registration Successful!'});

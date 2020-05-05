@@ -27,7 +27,7 @@ noticeRouter.route('/')
    }, (err) => next(err))
    .catch((err) => next(err));
 })
-.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, (req, res, next) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifySpecial, (req, res, next) => {
     if (req.body != null) {
         req.body.author = req.user._id;
         Notices.create(req.body)
@@ -75,11 +75,11 @@ noticeRouter.route('/:noticeId')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, (req,res,next) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifySpecial, (req,res,next) => {
     req.statusCode=403;
     res.end('POST operation not supported on /dishes/');
 })
-.put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, (req,res,next) => {
+.put(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifySpecial, (req,res,next) => {
     Notices.findById(req.params.noticeId)
     .then((notice) => {
         if (notice != null) {
@@ -110,7 +110,7 @@ noticeRouter.route('/:noticeId')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.delete(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, (req,res,next) => {
+.delete(cors.corsWithOptions, authenticate.verifyUser,  authenticate.verifySpecial, (req,res,next) => {
     Notices.findById(req.params.noticeId)
     .then((notice) => {
         if (notice != null) {

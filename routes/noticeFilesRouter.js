@@ -36,11 +36,11 @@ noticeFilesRouter.use(bodyParser.json());
 
 noticeFilesRouter.route('/:noticeId')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.cors, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, (req, res, next) => {
+.get(cors.cors, authenticate.verifyUser, authenticate.verifySpecial, (req, res, next) => {
     res.statusCode = 403;
     res.end('GET operation not supported on /imageUpload/'+req.params.noticeId);
 })
-.post(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin || authenticate.verifyAAA || authenticate.verifyTeacher, upload.single('imageFile'), (req, res, next) => {
+.post(cors.corsWithOptions, authenticate.verifyUser,  authenticate.verifySpecial, upload.single('imageFile'), (req, res, next) => {
     let x = "public/noticeFiles/"+ req.file.filename;
     Notices.findByIdAndUpdate(req.params.noticeId, {
         $set: {"file": x},
